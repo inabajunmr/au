@@ -28,7 +28,6 @@ const passkeyConfig = {
             { alg: -257, type: "public-key" }
         ],
         rp: {
-            id: "inabajunmr.github.io",
             name: "パスキーデモサイト"
         },
         timeout: 120000,

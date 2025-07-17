@@ -63,7 +63,7 @@
 <body>
     <div class="login-container">
         <h1>ログイン</h1>
-        <form id="loginForm">
+        <form id="loginForm" action="/" method="POST">
             <div class="form-group">
                 <label for="username">ユーザーID:</label>
                 <input type="text" id="username" name="username" required>
@@ -77,36 +77,8 @@
     </div>
 
     <script>
-        document.getElementById('loginForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            
-            if (username && password) {
-                try {
-                    // パスワード認証をシミュレート - POST リクエストを送信
-                    await fetch('/', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            username: username,
-                            password: password
-                        })
-                    }).catch(() => {
-                        // レスポンスは何であろうと捨てる（404エラーなど無視）
-                    });
-                    
-                    // POST後に遷移
-                    window.location.href = '/au/passkey.html';
-                } catch (error) {
-                    // エラーが発生してもとりあえず遷移
-                    window.location.href = '/au/passkey.html';
-                }
-            }
-        });
+        // フォームはそのまま POST /passkey に送信される
+        // JavaScriptでの処理は不要
     </script>
 </body>
 </html>
